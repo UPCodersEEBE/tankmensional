@@ -19,5 +19,10 @@ def template_test():
 def about():
     return render_template('about.html',my_string="Wheeeee!", my_list=[0,1,2,3,4,5])
 
+@app.route("/analytics")
+def analytics():
+    labels=["a","b",1,2,3]
+    return render_template('analytics.html', project_id="HLT",my_list=[0,1,2,3,4,5],labels=labels)
+
 if __name__ == '__main__':
     app.run()
