@@ -15,5 +15,9 @@ def template_test():
     return render_template('sample.html', my_string="Wheeeee!", my_list=[0,1,2,3,4,5])
 
 
+@app.route("/about")
+def about():
+    return render_template('about.html',my_string="Wheeeee!", my_list=[0,1,2,3,4,5])
+
 if __name__ == '__main__':
     app.run()

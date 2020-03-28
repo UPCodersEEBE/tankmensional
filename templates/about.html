@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h3> About this project</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius turpis dui, sed maximus ex fermentum a. Praesent nisi erat, maximus sed libero eget, vestibulum aliquet ligula. Quisque ac magna aliquam, vehicula dui nec, porta augue. Aliquam varius nisl nec nibh lacinia finibus. Morbi rutrum id ipsum tincidunt pharetra. Fusce sed ipsum gravida, posuere quam ac, molestie ante. Curabitur congue varius neque eget pulvinar. Ut ac metus in velit faucibus pretium.</p>
+  <p>Value from the list: {{my_list[3]}}</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in my_list %}
+    <li>{{n}}</li>
+    {% endfor %}
+  </ul>
+  <h3> About us</h3>
+  <p>We are a group of students.</p>
+{% endblock %}
