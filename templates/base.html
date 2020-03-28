@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}{% endblock %} - Tankmensional </title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">
+    {% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        Find our repository <a href="http://github.com/clara-9/tankmensional">here</a>.
+        {% endblock %}
+    </div>
+</body>
+</html>
