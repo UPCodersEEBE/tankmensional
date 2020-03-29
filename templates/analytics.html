@@ -20,29 +20,14 @@
           <canvas id="myChart" width="300" height="100"></canvas>
           <script>
 var ctx = document.getElementById('myChart').getContext('2d');
+var nom=  {{nom}};
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            data: {{rodet_count}},
             borderWidth: 1
         }]
     },
@@ -74,7 +59,7 @@ var myChart2 = new Chart(ctx, {
             label: 'My First dataset',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: {{lis[0:8]}}
+            data: [2,3,4,5,6,7,8,9]
         }]
     },
     options: {}

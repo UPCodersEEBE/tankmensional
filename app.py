@@ -31,9 +31,11 @@ def about():
 @app.route("/analytics")
 def analytics():
     import tankmensional_data as tkdata
-    p=tkdata.p.to_list()
-    print(p)
-    return render_template('analytics.html', project_id="HLT", lis=p)
+    df=tkdata.df
+    rodet_count=list(df.groupby("Rodet").count()["Series"])
+    rodet=list(df.groupby("Rodet").count()["Series"].index.values)
+    nom="nom"
+    return render_template('analytics.html', project_id="HLT", rodet_count=rodet_count, rodet=rodet, nom="nom")
 
 
 @app.route('/getdata', methods=["POST", "GET"])

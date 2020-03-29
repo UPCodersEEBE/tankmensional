@@ -40,6 +40,9 @@ df["Np"]=(df["power"]/(df["Rodet Diameter"]**5*df["velocitat"]**3*ro))
 df["logRe"]=numpy.log(df["Re"])
 df["logNp"]=numpy.log(df["Np"])
 
+df=df[df["Series"]!="A1.1"]
+df=df[df["velocitat"]<15]
+
 
 for rodet in df["Rodet"].unique():
     df_especific=df[df["Rodet"]==rodet]
