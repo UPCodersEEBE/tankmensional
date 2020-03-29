@@ -9,13 +9,15 @@ import pandas as pd
 import seaborn as sns
 import sklearn
 import numpy
+import  pymongo
+from pymongo import MongoClient
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import pathlib
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
+#import tensorflow as tf
+#from tensorflow import keras
+#from tensorflow.keras import layers
 
 #Constants
 
@@ -23,12 +25,26 @@ ro=1000
 densitat=ro
 viscositat=0.00102
 
-df=pd.read_csv("db_rowdy.csv", sep=";")
+client=MongoClient('mongodb+srv://Alex:Alex@tankmensional-v6eso.mongodb.net/test?retryWrites=true&w=majority')
+db = client['tankmension']
+collection = db['dades']
+
+
+#crear la base de dades de nou
+
+pd.options.display.max_columns = None
+
+df = pd.DataFrame(list(collection.find({})))
+
+
+#df=pd.read_csv("db_rowdy.csv", sep=";")
 
 
 df.rename(columns={'V (rpm)': 'velocitat',"Power (W)":"power"},inplace=True)
 
 ##df=df[df["Rodet"]=="Helix"]
+
+df[["Rodet Diameter", "Bandes","velocitat", "power"]]=df[["Rodet Diameter", "Bandes","velocitat", "power"]].astype("float64")
 
 df["velocitat"]=df["velocitat"]/60
 
@@ -49,8 +65,8 @@ df=df[df["Series"]!="A1.1"]
 df=df[df["velocitat"]<15]
 
 
-for rodet in df["Rodet"].unique():
-    df_especific=df[df["Rodet"]==rodet]
+for rodet in df["Series"].unique():
+    df_especific=df[df["Series"]==rodet]
     lm = LinearRegression()
     X = df_especific[["logRe"]]
     Y = df_especific['logNp']
