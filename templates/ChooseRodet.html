@@ -9,23 +9,25 @@ choose rodet
 <style>
     .dropdown {
         position: absolute;;
-        top: 50%;
+        top: 40%;
         left: 50%;
         margin-left: -50px;
         margin-top: -50px;
-}
+    }
 </style>
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Choose Rodet
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <form action="" method="POST">
+      <form action="" method="post">
+          <p>Velocity: <input type = "text" name = "velocity" /></p>
           <button class="dropdown-item" type="submit" name="PlotHelix" type="button" value = 'Helix'>Helix</button>
           <button class="dropdown-item" type="submit" name="PlotTurbina" type="button" value = 'Turbina'>Turbina</button>
           <button class="dropdown-item" type="submit" name="PlotDisc" type="button" value = 'Disc'>Disc</button>
           <button class="dropdown-item" type="submit" name="PlotCircular" type="button" value = 'Circular'>Circular</button>
       </form>
   </div>
-</form>
+</div>
+
 {% endblock %}
