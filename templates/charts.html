@@ -5,8 +5,7 @@
 {% block content %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <div class="container">
-  <div class="row">
-    <div class="col-lg">
+  <div class="container" height=500>
       <canvas id="myChart" height="100" width="300"></canvas>
       <script>
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -31,8 +30,12 @@ var myChart = new Chart(ctx, {
         }
     }
 });          </script>
+Predicted value:
     </div>
-    <div class="col-lg">
+    <div class="row align-items-center" height=500>
+      Empty
+    </div>
+    <div class="row align-items-center">
       <canvas id="myChart3" height="100" width="300"></canvas>
       <script>
 var ctx = document.getElementById('myChart3').getContext('2d');
@@ -56,8 +59,11 @@ var myChart3 = new Chart(ctx, {
 
         }
     }
-});          </script>
-    </div>    <div class="col-lg">
+});
+</script>
+Predicted value:
+    </div> 
+    <div class="row align-items-center">
       <canvas id="myChart2" height="100" width="300"></canvas>
       <script>
 var ctx = document.getElementById('myChart2').getContext('2d');
@@ -82,7 +88,7 @@ var myChart2 = new Chart(ctx, {
         }
     }
 });          </script>
+Predicted value:
     </div>
-  </div>
 </div>
 {% endblock %}

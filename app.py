@@ -45,6 +45,24 @@ def getdata():
         return redirect("/")
     else:
         return render_template("AddData.html")
+    
+value = []
+@app.route("/chooseplot", methods=["GET","POST"])
+def ChoosePlot():
+    types = ['PlotHelix', "PlotTurbina","PlotDisc","PlotCircular"]
+    if request.method == 'POST':
+        for i in types:
+            post_id = request.form.get(i)
+            if post_id is not None:
+                value.append(post_id)
+                return redirect("/analytics")
+    else:
+        return render_template('ChooseRodet.html')
+    
+@app.route("/one", methods=["GET", "POST"])
+def second():
+    import tankmensional_data as tk
+    
+    return (render_template('charts.html'))
 
-if __name__ == '__main__':
-    app.run()
+app.run(debug=True, use_reloader=False)

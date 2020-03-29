@@ -14,8 +14,7 @@ from pymongo import MongoClient
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
-import pathlib
-#import tensorflow as tf
+#import pathlib
 #from tensorflow import keras
 #from tensorflow.keras import layers
 
@@ -107,62 +106,6 @@ p=df["power"]
 phat=Nphat*df["Rodet Diameter"]**5*df["velocitat"]**3*ro
 
 df[["Circular", 'Disc', 'Helix', "Turbina"]] = pd.get_dummies(df["Rodet"])
-##########################
-####Tensorflow
-dataset.pop("Series")
-train_dataset = dataset.sample(frac=0.80,random_state=0)
-test_dataset = dataset.drop(train_dataset.index)
-
-train_stats = train_dataset.describe()
-train_stats.pop("power")
-train_stats = train_stats.transpose()
-
-train_labels = train_dataset.pop('power')
-test_labels = test_dataset.pop('power')
-
-def norm(x):
-  return (x - train_stats['mean']) / train_stats['std']
-
-normed_train_data = norm(train_dataset)
-normed_test_data = norm(test_dataset)
-
-def build_model():
-  model = keras.Sequential([
-    layers.Dense(64, activation='relu', input_shape=[len(train_dataset.keys())]),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(1)
-  ])
-
-  optimizer = tf.keras.optimizers.RMSprop(0.001)
-
-  model.compile(loss='mse',
-                optimizer=optimizer,
-                metrics=['mae', 'mse'])
-  return model
-
-model = build_model()
-
-EPOCHS = 996
-
-history = model.fit(
-  normed_train_data, train_labels,
-  epochs=EPOCHS, validation_split = 0.2, verbose=0,
-  )
-
-hist = pd.DataFrame(history.history)
-hist['epoch'] = history.epoch
-hist.tail()
-
-test_predictions = model.predict(normed_test_data).flatten()
-
-plt.scatter(test_labels, test_predictions)
-plt.xlabel('True Values [Power]')
-plt.ylabel('Predictions [Power]')
-plt.axis('equal')
-plt.axis('square')
-plt.xlim([0,plt.xlim()[1]])
-plt.ylim([0,plt.ylim()[1]])
-_ = plt.plot([-100, 100], [-100, 100])
 
 
 
