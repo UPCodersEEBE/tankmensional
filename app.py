@@ -45,22 +45,23 @@ def ChoosePlot():
         for i in types:
             post_id = request.form.get(i)
             if post_id is not None:
-                value.append(post_id)
+                value.append([post_id,request.form.get("velocity")])
                 return redirect("/analytics")
     else:
         return render_template('ChooseRodet.html')
-    
+
 
     
 @app.route("/analytics")
 def analytics():
     import tankmensional_data as tkdata
     rodet=value[len(value)-1]
-    prediction=tkdata.prediction
-    print(prediction[rodet])
-    return render_template('analytics.html', project_id=value[len(value)-1],rodet=rodet, nom="nom")
+    project_id = value[len(value) - 1][0]
+    velocity = value[len(value) - 1][1]
 
-    
+    return render_template('analytics.html', project_id=project_id, velocity=velocity, odet=rodet, nom="nom")
+
+
 @app.route("/one", methods=["GET", "POST"])
 def second():
     return (render_template('charts2.html'))
