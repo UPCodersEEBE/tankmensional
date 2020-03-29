@@ -55,7 +55,7 @@ def ChoosePlot():
 @app.route("/analytics")
 def analytics():
     import tankmensional_data as tkdata
-    rodet=value[len(value)-1]
+    rodet=value[len(value)-1][0]
     prediction=tkdata.prediction
     x=prediction[rodet][0]
     y=prediction[rodet][1]
