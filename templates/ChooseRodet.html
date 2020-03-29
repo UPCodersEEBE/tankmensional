@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+choose rodet
+{% endblock %}
+
+
+{% block content %}
+<style>
+    .dropdown {
+        position: absolute;;
+        top: 50%;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+}
+</style>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Choose Rodet
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <form action="" method="POST">
+          <button class="dropdown-item" type="submit" name="PlotHelix" type="button" value = 'a'>Helix</button>
+          <button class="dropdown-item" type="submit" name="PlotTurbina" type="button" value = 'b'>Turbina</button>
+          <button class="dropdown-item" type="submit" name="PlotDisc" type="button" value = 'c'>Disc</button>
+          <button class="dropdown-item" type="submit" name="PlotCircular" type="button" value = 'd'>Circular</button>
+      </form>
+  </div>
+</form>
+{% endblock %}
