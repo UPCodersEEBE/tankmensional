@@ -35,7 +35,7 @@ def analytics():
     rodet_count=list(df.groupby("Rodet").count()["Series"])
     rodet=list(df.groupby("Rodet").count()["Series"].index.values)
     nom="nom"
-    return render_template('analytics.html', project_id="HLT", rodet_count=rodet_count, rodet=rodet, nom="nom")
+    return render_template('analytics.html', project_id=value[len(value)-1], rodet_count=rodet_count, rodet=rodet, nom="nom")
 
 
 @app.route('/getdata', methods=["POST", "GET"])
@@ -49,6 +49,7 @@ def getdata():
 value = []
 @app.route("/chooseplot", methods=["GET","POST"])
 def ChoosePlot():
+    value=[]
     types = ['PlotHelix', "PlotTurbina","PlotDisc","PlotCircular"]
     if request.method == 'POST':
         for i in types:
