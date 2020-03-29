@@ -77,7 +77,7 @@ for rodet in df["Rodet"].unique():
     RMSE=mean_squared_error(Y, Yhat, squared=False)
     MSE=mean_squared_error(Y, Yhat)
     diametre_rod=df[df["Rodet"]==rodet]["Rodet Diameter"].mean()
-    line_pred=linial.predict(pd.DataFrame(range(100,1200,100)))
+    line_pred=linial.predict(pd.DataFrame(range(100,1200,100))/60)
     linial_res[rodet]=[list(range(100,1200,100)),list(line_pred), RMSE]
     
 for rodet in df["Rodet"].unique():

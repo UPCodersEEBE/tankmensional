@@ -55,21 +55,30 @@ def ChoosePlot():
 @app.route("/analytics")
 def analytics():
     import tankmensional_data as tkdata
+    import numpy
     import pandas as pd
-    rodet=value[len(value)-1][0]
-    linial_res=tkdata.linial_res
-    x=linial_res[rodet][0]
-    ly=linial_res[rodet][1]
+    rodet = value[len(value) - 1][0]
+    linial_res = tkdata.linial_res
+    x = linial_res[rodet][0]
+    ly = linial_res[rodet][1]
     velocity = value[len(value) - 1][1]
-    lYhat=round(tkdata.linial.predict(pd.DataFrame([float(velocity)]))[0],1)
-    
-    adim_res=tkdata.adim_res
-    ay=adim_res[rodet][1]
-    aYhat=round(tkdata.linial.predict(pd.DataFrame([float(velocity)]))[0],1)
-    
-    
-    return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,
-                           ly=ly, x=x, ay=ay, Yhat=aYhat)
+    lYhat = round(tkdata.linial.predict(pd.DataFrame([float(velocity)]))[0], 1)
+
+    diametre_rod_dic = {"Circular": 0.03, "Helix": 0.06, "Disc": 0.078, "Turbina": 0.045}
+    diametre_rod=diametre_rod_dic[rodet]
+
+    adim_res = tkdata.adim_res
+    adim = tkdata.adim
+    ay = adim_res[rodet][1]
+    df3 = pd.DataFrame({})
+    v = float(velocity)
+    df3["Re"] = tkdata.ro*v*diametre_rod / (tkdata.viscositat*60)
+    df3["logRe"] = numpy.log(df3["Re"])
+    logNp = adim.predict(df3[["logRe"]])
+    Np = numpy.exp(logNp)
+    aYhat = Np*diametre_rod**5 * velocity**3 * ro
+
+    return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,ly=ly, x=x, ay=ay, lYhat=lYhat, aYhat=aYhat)
 
 
 @app.route("/one", methods=["GET", "POST"])

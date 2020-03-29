@@ -7,7 +7,9 @@
       <div class="row">
         <div class="col">
           <h1> Analytics for {{rodet}} </h1>
-          <h2> Chosen velocity: {{velocity}}, predicted power {{Yhat}}</h2>
+            <h2> Chosen velocity: {{velocity}}</h2>
+            <h3>Predicted power velocity: {{lYhat}}</h3>
+            <h3>Predicted power adimentional: {{aYhat}}</h3>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         </div>
       </div>
@@ -27,11 +29,10 @@ var myChart2 = new Chart(ctx, {
                     data: {{ly[0:8]}}},
                     {
                     label: 'adimenisional',
-                    backgroundColor: 'rgb(0, 99, 132,0)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: {{ay[0:8]}
-                    }ç
-        ]
+                    backgroundColor: 'rgb(0, 255, 0,0)',
+                    borderColor: 'rgb(0, 255, 0)',
+                    data: {{ay[0:8]}}
+                    }]
     },
     options: {}
 }); 
