@@ -69,7 +69,7 @@ def analytics():
     
     
     return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,
-                           y=ay, x=x, Yhat=aYhat)
+                           ly=ly, x=x, ay=ay, Yhat=aYhat)
 
 
 @app.route("/one", methods=["GET", "POST"])
