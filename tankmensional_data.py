@@ -87,8 +87,8 @@ for rodet in df["Rodet"].unique():
     Yhat=lm.predict(X)
     RMSE=mean_squared_error(Y, Yhat, squared=False)
     MSE=mean_squared_error(Y, Yhat)
-    line_pred=lm.predict(pd.DataFrame(df["velocitat"].unique()))
-    prediction[rodet]=[list(df["velocitat"].unique()),list(line_pred), RMSE]
+    line_pred=lm.predict(pd.DataFrame(range(100,1200,100)))
+    prediction[rodet]=[list(range(100,1200,100)),list(line_pred), RMSE]
     
 
 

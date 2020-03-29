@@ -71,18 +71,19 @@ html {
 
 
   <div class="col-4">
+    <p>{{x}}{{y}}</p>
     <canvas id="myChart"></canvas>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: {{x[0:8]}},
                 datasets: [{
                     label: 'My First dataset',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: [2,3,4,5,6,7,8,9]
+                    data: {{y[0:8]}}
                 }]
             },
             options: {}

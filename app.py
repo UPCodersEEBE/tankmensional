@@ -58,7 +58,9 @@ def analytics():
     rodet=value[len(value)-1]
     prediction=tkdata.prediction
     print(prediction[rodet])
-    return render_template('analytics.html', project_id=value[len(value)-1],rodet=rodet, nom="nom")
+    x=prediction[rodet][0]
+    y=prediction[rodet][1]
+    return render_template('charts2.html', project_id=value[len(value)-1],rodet=rodet, nom="nom", x=x, y=y)
 
     
 @app.route("/one", methods=["GET", "POST"])
