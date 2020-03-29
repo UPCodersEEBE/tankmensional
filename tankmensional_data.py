@@ -65,6 +65,7 @@ df=df[df["velocitat"]<15]
 
 
 linial_res={}
+adim_res={}
 
 for rodet in df["Rodet"].unique():
     df_especific=df[df["Rodet"]==rodet]
@@ -75,41 +76,36 @@ for rodet in df["Rodet"].unique():
     Yhat=linial.predict(X)
     RMSE=mean_squared_error(Y, Yhat, squared=False)
     MSE=mean_squared_error(Y, Yhat)
+    diametre_rod=df[df["Rodet"]==rodet]["Rodet Diameter"].mean()
     line_pred=linial.predict(pd.DataFrame(range(100,1200,100)))
     linial_res[rodet]=[list(range(100,1200,100)),list(line_pred), RMSE]
     
 for rodet in df["Rodet"].unique():
     df_especific=df[df["Rodet"]==rodet]
-    lm = LinearRegression()
+    adim = LinearRegression()
     X = df_especific[["logRe"]]
     Y = df_especific['logNp']
-    lm.fit(X,Y)
-    Yhat=lm.predict(X)
+    adim.fit(X,Y)
+    Yhat=adim.predict(X)
     Nphat=numpy.exp(Yhat)
-    p=df["power"]
     phat=Nphat*df_especific["Rodet Diameter"]**5*df_especific["velocitat"]**3*ro
+    p=df["power"]
     RMSE=mean_squared_error(df_especific["power"], phat, squared=False)
     MSE=mean_squared_error(df_especific["power"], phat)
-    sns.scatterplot(x=p,y=phat)
-    plt.title(rodet)
-    print(rodet, "RSME",round(RMSE,2))
+    df3=pd.DataFrame({})
+    diametre_rod=df[df["Rodet"]==rodet]["Rodet Diameter"].mean()
+    df3["Re"]=ro*pd.DataFrame(range(100,1200,100))[0]*diametre_rod/(viscositat*60)
+    df3["logRe"]=numpy.log(df3["Re"])
+    
+    logNp=adim.predict(df3[["logRe"]])
+    Np=numpy.exp(logNp)
+    adim_pred=Np*diametre_rod**5*(pd.DataFrame(range(100,1200,100))[0]/60)**3*ro
+        
+    adim_res[rodet]=[list(range(100,1200,100)),list(adim_pred), RMSE]
     
 
 
-lm = LinearRegression()
 
-X = df[["logRe"]]
-Y = df['logNp']
-
-lm.fit(X,Y)
-Yhat=lm.predict(X)
-MSE=mean_squared_error(Y, Yhat)
-RMSE=mean_squared_error(Y, Yhat, squared=False)
-
-Nphat=numpy.exp(Yhat)
-
-p=df["power"]
-phat=Nphat*df["Rodet Diameter"]**5*df["velocitat"]**3*ro
 
 #df[["Circular", 'Disc', 'Helix', "Turbina"]] = pd.get_dummies(df["Rodet"])
 
