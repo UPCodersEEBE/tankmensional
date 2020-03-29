@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}
+  Title of the page
+{% endblock %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <canvas id="myChart" height="100" width="300"></canvas>
+      <script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+        datasets: [{
+            label: '# of Votes',
+            data: [1,2,3,4],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+
+        }
+    }
+});          </script>
+    </div>
+    <div class="col-lg">
+      <canvas id="myChart3" height="100" width="300"></canvas>
+      <script>
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart3 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+        datasets: [{
+            label: '# of Votes',
+            data: [1,2,3,4],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+
+        }
+    }
+});          </script>
+    </div>    <div class="col-lg">
+      <canvas id="myChart2" height="100" width="300"></canvas>
+      <script>
+var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart2 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+        datasets: [{
+            label: '# of Votes',
+            data: [1,2,3,4],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+
+        }
+    }
+});          </script>
+    </div>
+  </div>
+</div>
+{% endblock %}
