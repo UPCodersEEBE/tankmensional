@@ -55,6 +55,7 @@ def ChoosePlot():
 @app.route("/analytics")
 def analytics():
     import tankmensional_data as tkdata
+<<<<<<< HEAD
     import pandas as pd
     rodet=value[len(value)-1][0]
     linial_res=tkdata.linial_res
