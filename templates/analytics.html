@@ -3,45 +3,12 @@
   Title of the page
 {% endblock %}
 {% block content %}
-  <div class="container text-center">
+  <div class="container text-center" >
       <div class="row">
         <div class="col">
-          <h1> Analytics for {{project_id}} </h1>
-          <h2>Chosen velocity: {{velocity}}</h2>
+          <h1> Analytics for {{rodet}} </h1>
+          <h2> Chosen velocity: {{velocity}}, predicted power {{Yhat}}</h2>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        </div>
-      </div>
-      <div class="row">
-          <div class="col">
-          <p>Cummulative number of users:</p>
-          </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="myChart" width="300" height="100"></canvas>
-          <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var nom=  {{nom}};
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
-        datasets: [{
-            label: '# of Votes',
-            data: {{rodet_count}},
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});          </script>
         </div>
       </div>
    <div class="row">
@@ -50,17 +17,14 @@ var myChart = new Chart(ctx, {
           <script>
 var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart2 = new Chart(ctx, {
-    // The type of chart we want to create
     type: 'line',
-
-    // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [2,3,4,5,6,7,8,9]
+                labels: {{x[0:8]}},
+                datasets: [{
+                    label: 'Power-Velocity',
+                    backgroundColor: 'rgb(255, 99, 132,0)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: {{y[0:8]}}
         }]
     },
     options: {}

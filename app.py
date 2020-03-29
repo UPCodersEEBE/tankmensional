@@ -55,13 +55,14 @@ def ChoosePlot():
 @app.route("/analytics")
 def analytics():
     import tankmensional_data as tkdata
-    rodet=value[len(value)-1]
-    prediction=tkdata.prediction
-    x=prediction[rodet][0]
-    y=prediction[rodet][1]
+    import pandas as pd
+    rodet=value[len(value)-1][0]
+    linial_res=tkdata.linial_res
+    x=linial_res[rodet][0]
+    y=linial_res[rodet][1]
     velocity = value[len(value) - 1][1]
-
-    return render_template('analytics.html', project_id="Hola" velocity=velocity, rodet=rodet, nom="nom")
+    Yhat=round(tkdata.linial.predict(pd.DataFrame([float(velocity)]))[0],1)
+    return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet, nom="nom", y=y, x=x, Yhat=Yhat)
 
 
 @app.route("/one", methods=["GET", "POST"])

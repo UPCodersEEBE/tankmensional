@@ -64,8 +64,20 @@ df=df[df["Series"]!="A1.1"]
 df=df[df["velocitat"]<15]
 
 
-prediction={}
+linial_res={}
 
+for rodet in df["Rodet"].unique():
+    df_especific=df[df["Rodet"]==rodet]
+    linial = LinearRegression()
+    X = df_especific[["velocitat"]]
+    Y = df_especific['power']
+    linial.fit(X,Y)
+    Yhat=linial.predict(X)
+    RMSE=mean_squared_error(Y, Yhat, squared=False)
+    MSE=mean_squared_error(Y, Yhat)
+    line_pred=linial.predict(pd.DataFrame(range(100,1200,100)))
+    linial_res[rodet]=[list(range(100,1200,100)),list(line_pred), RMSE]
+    
 for rodet in df["Rodet"].unique():
     df_especific=df[df["Rodet"]==rodet]
     lm = LinearRegression()
@@ -81,14 +93,6 @@ for rodet in df["Rodet"].unique():
     sns.scatterplot(x=p,y=phat)
     plt.title(rodet)
     print(rodet, "RSME",round(RMSE,2))
-    X = df_especific[["velocitat"]]
-    Y = df_especific['power']
-    lm.fit(X,Y)
-    Yhat=lm.predict(X)
-    RMSE=mean_squared_error(Y, Yhat, squared=False)
-    MSE=mean_squared_error(Y, Yhat)
-    line_pred=lm.predict(pd.DataFrame(range(100,1200,100)))
-    prediction[rodet]=[list(range(100,1200,100)),list(line_pred), RMSE]
     
 
 
