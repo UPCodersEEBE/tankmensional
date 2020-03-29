@@ -29,8 +29,6 @@ def about():
     return render_template('about.html',my_string="Wheeeee!", my_list=[0,1,2,3,4,5])
 
 
-
-
 @app.route('/getdata', methods=["POST", "GET"])
 def getdata():
     if request.method == "POST":
@@ -52,6 +50,7 @@ def ChoosePlot():
     else:
         return render_template('ChooseRodet.html')
     
+
     
 @app.route("/analytics")
 def analytics():
@@ -60,6 +59,7 @@ def analytics():
     prediction=tkdata.prediction
     print(prediction[rodet])
     return render_template('analytics.html', project_id=value[len(value)-1],rodet=rodet, nom="nom")
+
     
 @app.route("/one", methods=["GET", "POST"])
 def second():

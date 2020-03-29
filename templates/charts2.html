@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}
+  Title of the page
+{% endblock %}
+{% block content %}
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+.header {
+  background-color: #9933cc;
+  color: #ffffff;
+  padding: 15px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.menu li:hover {
+  background-color: #0099cc;
+}
+</style>
+
+
+
+<div class="row1">
+
+
+  <div class="col-6">
+    <canvas id="myChart"></canvas>
+        <script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+          datasets: [{
+              label: '# of Votes',
+              data: [1,2,3,4],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+  
+          }
+      }
+  });          </script>
+</div>
+<div class="col-6 menu">
+    <canvas id="myChart2"></canvas>
+        <script>
+  var ctx = document.getElementById('myChart2').getContext('2d');
+  var myChart2 = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+          datasets: [{
+              label: '# of Votes',
+              data: [1,2,3,4],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+  
+          }
+      }
+  });          </script>
+  </div>
+  <div class="row1">
+  
+    <div class="col-6">
+      <canvas id="myChart3"></canvas>
+          <script>
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var myChart3 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+            datasets: [{
+                label: '# of Votes',
+                data: [1,2,3,4],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+    
+            }
+        }
+    });          </script>
+  </div>
+  <div class="col-6 menu">
+      <canvas id="myChart4"></canvas>
+          <script>
+    var ctx = document.getElementById('myChart4').getContext('2d');
+    var myChart4 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
+            datasets: [{
+                label: '# of Votes',
+                data: [1,2,3,4],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+    
+            }
+        }
+    });          </script>
+    </div>
+
+{% endblock %}
