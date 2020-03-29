@@ -70,111 +70,63 @@ html {
 <div class="row1">
 
 
-  <div class="col-6">
+  <div class="col-4">
     <canvas id="myChart"></canvas>
-        <script>
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
-          datasets: [{
-              label: '# of Votes',
-              data: [1,2,3,4],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-  
-          }
-      }
-  });          </script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [2,3,4,5,6,7,8,9]
+                }]
+            },
+            options: {}
+        }); 
+        </script>
 </div>
-<div class="col-6 menu">
+<div class="col-4 menu">
     <canvas id="myChart2"></canvas>
-        <script>
-  var ctx = document.getElementById('myChart2').getContext('2d');
-  var myChart2 = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
-          datasets: [{
-              label: '# of Votes',
-              data: [1,2,3,4],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-  
-          }
-      }
-  });          </script>
-  </div>
-  <div class="row1">
-  
-    <div class="col-6">
-      <canvas id="myChart3"></canvas>
-          <script>
-    var ctx = document.getElementById('myChart3').getContext('2d');
-    var myChart3 = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
-            datasets: [{
-                label: '# of Votes',
-                data: [1,2,3,4],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    <script>
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart2 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [2,3,4,5,6,0,8,9]
                 }]
-    
-            }
-        }
-    });          </script>
-  </div>
-  <div class="col-6 menu">
-      <canvas id="myChart4"></canvas>
-          <script>
-    var ctx = document.getElementById('myChart4').getContext('2d');
-    var myChart4 = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Circular', 'Disc', 'Helix', 'Turbina'],
-            datasets: [{
-                label: '# of Votes',
-                data: [1,2,3,4],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+            },
+            options: {}
+        }); 
+        </script>
+</div>
+  <div class="col-4 menu">
+    <canvas id="myChart3"></canvas>
+    <script>
+        var ctx = document.getElementById('myChart3').getContext('2d');
+        var myChart3 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [2,3,4,5,6,10,8,9]
                 }]
-    
-            }
-        }
-    });          </script>
+            },
+            options: {}
+        }); 
+        </script>
     </div>
-
+  </div>
+  
 {% endblock %}
