@@ -28,14 +28,7 @@ def template_test():
 def about():
     return render_template('about.html',my_string="Wheeeee!", my_list=[0,1,2,3,4,5])
 
-@app.route("/analytics")
-def analytics():
-    import tankmensional_data as tkdata
-    df=tkdata.df
-    rodet_count=list(df.groupby("Rodet").count()["Series"])
-    rodet=list(df.groupby("Rodet").count()["Series"].index.values)
-    nom="nom"
-    return render_template('analytics.html', project_id=value[len(value)-1], rodet_count=rodet_count, rodet=rodet, nom="nom")
+
 
 
 @app.route('/getdata', methods=["POST", "GET"])
@@ -49,7 +42,6 @@ def getdata():
 value = []
 @app.route("/chooseplot", methods=["GET","POST"])
 def ChoosePlot():
-    value=[]
     types = ['PlotHelix', "PlotTurbina","PlotDisc","PlotCircular"]
     if request.method == 'POST':
         for i in types:
@@ -60,10 +52,17 @@ def ChoosePlot():
     else:
         return render_template('ChooseRodet.html')
     
+    
+@app.route("/analytics")
+def analytics():
+    import tankmensional_data as tkdata
+    rodet=value[len(value)-1]
+    prediction=tkdata.prediction
+    print(prediction[rodet])
+    return render_template('analytics.html', project_id=value[len(value)-1],rodet=rodet, nom="nom")
+    
 @app.route("/one", methods=["GET", "POST"])
 def second():
-    import tankmensional_data as tk
-    
-    return (render_template('charts.html'))
+    return (render_template('charts2.html'))
 
 app.run(debug=True, use_reloader=False)

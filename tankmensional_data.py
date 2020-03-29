@@ -64,8 +64,10 @@ df=df[df["Series"]!="A1.1"]
 df=df[df["velocitat"]<15]
 
 
-for rodet in df["Series"].unique():
-    df_especific=df[df["Series"]==rodet]
+prediction={}
+
+for rodet in df["Rodet"].unique():
+    df_especific=df[df["Rodet"]==rodet]
     lm = LinearRegression()
     X = df_especific[["logRe"]]
     Y = df_especific['logNp']
@@ -85,8 +87,8 @@ for rodet in df["Series"].unique():
     Yhat=lm.predict(X)
     RMSE=mean_squared_error(Y, Yhat, squared=False)
     MSE=mean_squared_error(Y, Yhat)
-    print(rodet, "RSME",round(RMSE,2))
-    print(rodet, round(RMSE,2))
+    line_pred=lm.predict(pd.DataFrame(df["velocitat"].unique()))
+    prediction[rodet]=[list(line_pred), RMSE]
     
 
 
@@ -105,7 +107,7 @@ Nphat=numpy.exp(Yhat)
 p=df["power"]
 phat=Nphat*df["Rodet Diameter"]**5*df["velocitat"]**3*ro
 
-df[["Circular", 'Disc', 'Helix', "Turbina"]] = pd.get_dummies(df["Rodet"])
+#df[["Circular", 'Disc', 'Helix', "Turbina"]] = pd.get_dummies(df["Rodet"])
 
 
 
