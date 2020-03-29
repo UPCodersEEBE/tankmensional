@@ -21,8 +21,10 @@ def about():
 
 @app.route("/analytics")
 def analytics():
-    labels=["a","b",1,2,3]
-    return render_template('analytics.html', project_id="HLT",my_list=[0,1,2,3,4,5],labels=labels)
+    import tankmensional_data as tkdata
+    p=tkdata.p.to_list()
+    print(p)
+    return render_template('analytics.html', project_id="HLT", lis=p)
 
 if __name__ == '__main__':
     app.run()
