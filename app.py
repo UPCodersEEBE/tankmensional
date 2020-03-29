@@ -61,6 +61,7 @@ def analytics():
     linial_res = tkdata.linial_res
     x = linial_res[rodet][0]
     ly = linial_res[rodet][1]
+    lrmse=linial_res[rodet][2]
     velocity = value[len(value) - 1][1]
     velocity=float(velocity)/60
     lYhat = round(tkdata.linial_fits[rodet].predict(pd.DataFrame([float(velocity)]))[0],1)
@@ -71,13 +72,14 @@ def analytics():
     adim_res = tkdata.adim_res
     adim = tkdata.adim
     ay = adim_res[rodet][1]
+    armse=adim_res[rodet][2]
     v = float(velocity)
     Re = tkdata.ro*(v)*diametre_rod / (tkdata.viscositat)
     logRe=numpy.log(Re)
     logNp = tkdata.adim_fits[rodet].predict(pd.DataFrame([float(logRe)]))
     Np = numpy.exp(logNp)
     aYhat = round(Np[0]*diametre_rod**5 * (v)**3 * tkdata.ro,1)
-    return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,ly=ly, x=x, ay=ay, lYhat=lYhat, aYhat=aYhat)
+    return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,ly=ly, x=x, ay=ay, lYhat=lYhat, aYhat=aYhat, lrmse=lrmse, armse=armse)
 
 
 @app.route("/one", methods=["GET", "POST"])
