@@ -5,7 +5,6 @@ Created on Sat Mar 28 16:46:09 2020
 @author: crull
 """
 
-
 import pandas as pd
 import seaborn as sns
 import sklearn
@@ -71,8 +70,6 @@ for rodet in df["Rodet"].unique():
     RMSE=mean_squared_error(Y, Yhat, squared=False)
     MSE=mean_squared_error(Y, Yhat)
     print(rodet, "RSME",round(RMSE,2))
-    
-    
     
 
 
