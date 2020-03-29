@@ -92,7 +92,6 @@ test_dataset = dataset.drop(train_dataset.index)
 train_stats = train_dataset.describe()
 train_stats.pop("power")
 train_stats = train_stats.transpose()
-train_stats
 
 train_labels = train_dataset.pop('power')
 test_labels = test_dataset.pop('power')
@@ -119,17 +118,12 @@ def build_model():
 
 model = build_model()
 
-class PrintDot(keras.callbacks.Callback):
-  def on_epoch_end(self, epoch, logs):
-    if epoch % 100 == 0: print('')
-    print('.', end='')
-
-EPOCHS = 900
+EPOCHS = 996
 
 history = model.fit(
   normed_train_data, train_labels,
   epochs=EPOCHS, validation_split = 0.2, verbose=0,
-  callbacks=[PrintDot()])
+  )
 
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
