@@ -57,12 +57,11 @@ def analytics():
     import tankmensional_data as tkdata
     rodet=value[len(value)-1]
     prediction=tkdata.prediction
-    print(prediction[rodet])
     x=prediction[rodet][0]
     y=prediction[rodet][1]
     velocity = value[len(value) - 1][1]
 
-    return render_template('analytics.html', project_id=project_id, velocity=velocity, odet=rodet, nom="nom")
+    return render_template('analytics.html', project_id="Hola" velocity=velocity, rodet=rodet, nom="nom")
 
 
 @app.route("/one", methods=["GET", "POST"])
