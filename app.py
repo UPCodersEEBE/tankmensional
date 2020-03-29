@@ -62,7 +62,8 @@ def analytics():
     x = linial_res[rodet][0]
     ly = linial_res[rodet][1]
     velocity = value[len(value) - 1][1]
-    lYhat = round(tkdata.linial.predict(pd.DataFrame([float(velocity)]))[0], 1)
+    velocity=float(velocity)/60
+    lYhat = tkdata.linial_fits[rodet].predict(pd.DataFrame([float(velocity)]))
 
     diametre_rod_dic = {"Circular": 0.03, "Helix": 0.06, "Disc": 0.078, "Turbina": 0.045}
     diametre_rod=diametre_rod_dic[rodet]
@@ -70,13 +71,12 @@ def analytics():
     adim_res = tkdata.adim_res
     adim = tkdata.adim
     ay = adim_res[rodet][1]
-    df3 = pd.DataFrame({})
     v = float(velocity)
-    Re = tkdata.ro*v*diametre_rod / (tkdata.viscositat*60)
+    Re = tkdata.ro*(v)*diametre_rod / (tkdata.viscositat)
     logRe=numpy.log(Re)
-    logNp = adim.predict(pd.DataFrame([float(logRe)]))
+    logNp = tkdata.adim_fits[rodet].predict(pd.DataFrame([float(logRe)]))
     Np = numpy.exp(logNp)
-    aYhat = Np*diametre_rod**5 * v**3 * tkdata.ro
+    aYhat = Np[0]*diametre_rod**5 * (v)**3 * tkdata.ro
     return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,ly=ly, x=x, ay=ay, lYhat=lYhat, aYhat=aYhat)
 
 

@@ -65,7 +65,9 @@ df=df[df["velocitat"]<15]
 
 
 linial_res={}
+linial_fits={}
 adim_res={}
+adim_fits={}
 
 for rodet in df["Rodet"].unique():
     df_especific=df[df["Rodet"]==rodet]
@@ -73,6 +75,7 @@ for rodet in df["Rodet"].unique():
     X = df_especific[["velocitat"]]
     Y = df_especific['power']
     linial.fit(X,Y)
+    linial_fits[rodet]=linial
     Yhat=linial.predict(X)
     RMSE=mean_squared_error(Y, Yhat, squared=False)
     MSE=mean_squared_error(Y, Yhat)
@@ -86,6 +89,7 @@ for rodet in df["Rodet"].unique():
     X = df_especific[["logRe"]]
     Y = df_especific['logNp']
     adim.fit(X,Y)
+    adim_fits[rodet]=adim
     Yhat=adim.predict(X)
     Nphat=numpy.exp(Yhat)
     phat=Nphat*df_especific["Rodet Diameter"]**5*df_especific["velocitat"]**3*ro
