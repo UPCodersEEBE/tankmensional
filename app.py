@@ -5,8 +5,17 @@ Created on Sat Mar 28 19:06:22 2020
 @author: crull
 """
 
+from flask import Flask, render_template, request, redirect
+from pymongo import MongoClient
 
-from flask import Flask, render_template
+alex=MongoClient('mongodb+srv://Alex:Alex@tankmensional-v6eso.mongodb.net/test?retryWrites=true&w=majority')
+db = alex['tankmension']
+collection = db['dades']
+
+
+results=collection.find({})
+
+
 app = Flask(__name__)
 
 
