@@ -72,12 +72,11 @@ def analytics():
     ay = adim_res[rodet][1]
     df3 = pd.DataFrame({})
     v = float(velocity)
-    df3["Re"] = tkdata.ro*v*diametre_rod / (tkdata.viscositat*60)
-    df3["logRe"] = numpy.log(df3["Re"])
-    logNp = adim.predict(df3[["logRe"]])
+    Re = tkdata.ro*v*diametre_rod / (tkdata.viscositat*60)
+    logRe=numpy.log(Re)
+    logNp = adim.predict(pd.DataFrame([float(logRe)]))
     Np = numpy.exp(logNp)
-    aYhat = Np*diametre_rod**5 * velocity**3 * ro
-
+    aYhat = Np*diametre_rod**5 * v**3 * tkdata.ro
     return render_template('analytics.html', project_id=rodet, velocity=velocity, rodet=rodet,ly=ly, x=x, ay=ay, lYhat=lYhat, aYhat=aYhat)
 
 
