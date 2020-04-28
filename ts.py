@@ -67,17 +67,25 @@ for freq in df["frequency"].unique():
     conf_min.append(conf_int[0])
     conf_max.append(conf_int[1])
 
+conf=pd.DataFrame({"freq":df["frequency"].unique(),"low":conf_min,"high":conf_max})
+conf["ts"]=ts.predict(conf[["freq"]])
+conf["lsq"]=lsq.predict(conf[["freq"]])
+conf.to_csv("powerfreqmodel.csv")
 
-
-plt.plot(df["frequency"],df["lsq-estimated"], c="red")
+plt.plot(df["frequency"],df["lsq-estimated"])
 plt.plot(df["frequency"],df["ts-estimated"])
+plt.legend(["Least-Squares", "Theil-Sen"])
 # plt.scatter(df["frequency"].unique(),conf_max, c="grey")
 # plt.scatter(df["frequency"].unique(),conf_min)
 
-sns.lineplot(x=df["frequency"].unique(),y=conf_max)
-sns.lineplot(x=df["frequency"].unique(),y=conf_min)
+sns.lineplot(x=df["frequency"].unique(),y=conf_max, color="gray")
+ax=sns.lineplot(x=df["frequency"].unique(),y=conf_min,color="gray")
 
-plt.scatter(df["frequency"],df["power"], c="black",marker="x")
+plt.scatter(df["frequency"],df["power"], c="black",marker="x", s=12)
+
+ax.set(xlabel='Frequency (Hz)', ylabel='Power (W)')
+
+plt.savefig('powerfreq.pdf')
 
 
 
@@ -102,23 +110,26 @@ lsq=LinearRegression()
 lsq.fit(X=df[["logRe"]],y=df["logNp"])
 df["lsq-estimatedNp"]=lsq.predict(df[["logRe"]])
 
-# conf_max=[]
-# conf_min=[]
+conf_max=[]
+conf_min=[]
 
-# for re in df["logRe"].unique():
-#     serie=df[df["logRe"]==re]["logNp"]
-#     mu=statistics.mean(serie)
-#     sigma=numpy.std(serie)
-#     gl=len(serie)
-#     conf_int = t.interval(0.30,gl, loc=mu,scale=sigma)
-#     conf_min.append(conf_int[0])
-#     conf_max.append(conf_int[1])
+for re in df["logRe"].unique():
+    serie=df[df["logRe"]==re]["logNp"]
+    mu=statistics.mean(serie)
+    sigma=numpy.std(serie)
+    gl=len(serie)
+    conf_int = t.interval(0.30,gl, loc=mu,scale=sigma)
+    conf_min.append(conf_int[0])
+    conf_max.append(conf_int[1])
 
 
-# plt.clf()
-# plt.plot(df["logRe"],df["lsq-estimatedNp"], c="red")
-# plt.plot(df["logRe"],df["ts-estimatedNp"])
-# plt.scatter(df["logRe"],df["logNp"], c="black",marker="x")
+plt.clf()
+plt.plot(df["logRe"],df["lsq-estimatedNp"], c="red")
+plt.plot(df["logRe"],df["ts-estimatedNp"])
+plt.legend(["Least-Squares", "Theil-Sen"])
+plt.scatter(df["logRe"],df["logNp"], c="black",marker="x",s=12)
+ax.set(xlabel='logRe', ylabel='logNp')
+plt.savefig('adminesional.pdf')
 
 #multiple regs
 lr=LinearRegression()
